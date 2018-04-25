@@ -11,4 +11,4 @@ begin
     next_address <= new_address + 4;
 end
 
-endmodulej
+endmodule
