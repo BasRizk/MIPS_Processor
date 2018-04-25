@@ -1,15 +1,12 @@
-module main_control(regDest, jump, memToRead, memToReg,
-	aluOp, memWrite, aluSrc, regWrite, next_opCode, clk);
+module main_control(regDest, memToRead, memToReg,
+	aluOp, memWrite, aluSrc, regWrite, next_opCode);
 
-output reg regDest, jump, memToRead, memToReg,
+output reg regDest, memToRead, memToReg,
 	aluOp, memWrite, aluSrc, regWrite;
 input [4:0] next_opCode;
-input clk;
 
-always @ (posedge clk or next_opCode)
+always @ (next_opCode)
 begin
-
-case
 
 	/*
 	? Arithmetic: add, sub, addi
@@ -18,6 +15,11 @@ case
 	? Control flow: beq
 	? Comparison: slt, sltu
 	*/
+
+/*
+case(next_opCode)
+endcase
+*/
 
 end
 

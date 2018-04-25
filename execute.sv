@@ -15,17 +15,17 @@ module execute (new_address, zero, ALU_result, next_address,
            2'b00 : ALU_control = 4'b0010; 
            2'b01 : ALU_control = 4'b0110;
            2'b10 : case(extended_offset[5:0])
-                   6'b100000 : ALU_control = 4'b0010;
-                   6'b100010 : ALU_control = 4'b0110;
-                   6'b100100 : ALU_control = 4'b0000;
-                   6'b100101 : ALU_control = 4'b0001;
-                   6'b101010 : ALU_control = 4'b0111;
+                   6'b100000 : ALU_control <= 4'b0010;
+                   6'b100010 : ALU_control <= 4'b0110;
+                   6'b100100 : ALU_control <= 4'b0000;
+                   6'b100101 : ALU_control <= 4'b0001;
+                   6'b101010 : ALU_control <= 4'b0111;
                endcase
        endcase
    end
    ALU_Unit alu(ALU_result,read_data_1,ALU_input2,ALU_control);
    always@(extended_offset,old_address) begin
-        new_address = old_address + extended_offset; 
+        new_address <= old_address + extended_offset; 
    end
    
    endmodule
