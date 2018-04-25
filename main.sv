@@ -17,6 +17,7 @@ assign write_data = read_data_2;
 assign address_mem = alu_result;
 
 
+
 // DATA PATH
 instruction_fetch IF (next_instruction ,next_address, new_address, clk);
 
@@ -27,6 +28,7 @@ execute EX (new_address, zero, alu_result, next_address, read_data_1, read_data_
 	 extended_address, clk);
 
 memory_access MEM(read_data, new_address, zero, address_mem, write_data, clk);
+
 
 //write_data = read_data_2 && address_mem = alu_result //for the sake of meaningfullness
 write_back WB (wb_data, read_data, alu_result, clk);
