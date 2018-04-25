@@ -1,11 +1,12 @@
 module execute (new_address, zero, ALU_result, next_address,
-    read_data_1, read_data_2, extended_offset,old_address,ALU_op,ALU_src);
+    read_data_1, read_data_2, extended_offset,old_address,ALU_op,ALU_src,clk);
    
    output reg [31:0] new_address, ALU_result, next_address;
    output reg zero; 
    input [31:0] read_data_1, read_data_2, extended_offset,old_address;
    input [1:0] ALU_op;
    input ALU_src;
+   input clk; //to be used
    reg [3:0] ALU_control;
    reg [31:0] ALU_input2;
    
