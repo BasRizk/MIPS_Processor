@@ -6,10 +6,18 @@ output reg regDest, jump, memToRead, memToReg,
 input [4:0] next_opCode;
 input clk;
 
-always @ (posedge clk)
+always @ (posedge clk or next_opCode)
 begin
 
-	// Control work... xD
+case
+
+	/*
+	? Arithmetic: add, sub, addi
+	? Load/Store: lw, sw, lh, lhu
+	? Logic: and, or, sll, srl, and, or
+	? Control flow: beq
+	? Comparison: slt, sltu
+	*/
 
 end
 
