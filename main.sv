@@ -25,7 +25,7 @@ instruction_fetch IF (next_instruction ,supposed_next_address, branch_or_not_add
 instruction_decode ID (read_data_1, read_data_2, extended_branch_offset, next_instruction,
 	 write_data_into_reg, ctrl_regDest, ctrl_regWrite, clk);
 
-execute EX (branch_or_not_address, zero, alu_result, supposed_next_address, read_data_1, read_data_2,
+execute EX (branch_or_not_address, zero, alu_result, read_data_1, read_data_2,
 	 extended_branch_offset,next_instruction,ctrl_aluOp,ctrl_aluSrc,clk);
 
 memory_access MEM(read_data_from_mem, branch_or_not_address, zero, mem_address, write_data_into_mem, clk);
