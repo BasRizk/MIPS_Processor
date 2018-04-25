@@ -4,7 +4,11 @@ module ALU_Unit(ALU_result,input1,input2,selectionLines);
     input [3:0] selectionLines;
     always@(input1,input2,selectionLines) begin
         case(selectionLines)
-            //ALU cases to be added
+            4'b0000 : ALU_result = input1 & input2;
+            4'b0001 : ALU_result = input1 | input2;
+            4'b0010 : ALU_result = input1 + input2;
+            4'b0110 : ALU_result = input1 - input2;
+            4'b0111 : ALU_result = (input1 < input2)? 1 : 0;
         endcase
     end
     
