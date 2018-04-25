@@ -35,7 +35,9 @@ read_data_2 <= register_file[rt_read_reg_2];
 extended_address <= { {16{address_immed[15]}}, address_immed };
 
 write_register <= (ctrl_reg_dest)? rd_inst_15_11: rt_read_reg_2; // RegDest Mux
-register_file[write_register] <= (ctrl_reg_write)? write_data: register_file[write_register];
+
+register_file[write_register] <= (ctrl_reg_write && write_register != 0)?
+ write_data: register_file[write_register];
 
 end
 
