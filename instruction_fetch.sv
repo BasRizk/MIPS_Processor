@@ -7,7 +7,7 @@ input clk;
 reg [7:0] i_mem [255:0];  // The size of the memory is based on 2^28. 28 are the bits PC[27:0] used as address index
                           // The 2^28 does not work, so 255 is used for now
 
-always @(clk)
+always @(posedge clk)
 begin    
     next_instruction <= {{i_mem[current_address[27:0]]},
                         {i_mem[current_address[27:0] + 1]},
