@@ -2,6 +2,7 @@ module ALU_Unit(ALU_result,input1,input2,selectionLines);
     output reg [31:0] ALU_result;
     input [31:0] input1,input2;
     input [3:0] selectionLines;
+
     always@(input1,input2,selectionLines) begin
         case(selectionLines)
             4'b0000 : ALU_result = input1 & input2;

@@ -1,0 +1,16 @@
+Wed Apr 25 17:41:26 CAT 2018
+Trace back: couldn't open "C:/Users/Xbass/Documents/GitHub/MIPS_Processor/instruction_decode.sv": no such file or directory
+    while executing
+"open $fileName w"
+    (object "::.main_pane.source2.interior.cs.body.srcobj" method "::vsimwidgets::Srcobj::SaveFile" body line 17)
+    invoked from within
+"SaveFile"
+    (object "::.main_pane.source2.interior.cs.body.srcobj" method "::vsimwidgets::Srcobj::CheckModification" body line 40)
+    invoked from within
+"::.main_pane.source2.interior.cs.body.srcobj CheckModification"
+    (in namespace inscope "::vsimwidgets::Srcobj" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Srcobj {::.main_pane.source2.interior.cs.body.srcobj CheckModification}"
+    (command bound to event)
+  <2:C:/altera_lite/15.1/modelsim_ase/win32aloem/tk8.5/bgerror.tcl:92: ::tkerror {couldn't open "C:/Users/Xbass/Documents/GitHub/MIPS_Processor/instruction_decode.sv": no such file or directory}
+  <1:C:/altera_lite/15.1/modelsim_ase/win32aloem/tk8.5/dialog.tcl:178: ::tk::dialog::error::bgerror {couldn't open "C:/Users/Xbass/Documents/GitHub/MIPS_Processor/instruction_decode.sv": no such file or directory}
