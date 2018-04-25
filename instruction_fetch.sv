@@ -3,7 +3,8 @@ module instruction_fetch (next_instruction ,next_address, new_basic_address, new
 output reg [31:0] next_instruction, next_address;
 input [31:0] new_basic_address, new_branch_address;
 input clk, jump;
-reg [7:0] mem [268435455:0];
+
+reg [7:0] mem [27:0];
 
 always @(clk)
 begin    
