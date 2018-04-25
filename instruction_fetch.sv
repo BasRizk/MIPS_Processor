@@ -6,7 +6,7 @@ input [31:0] new_address;
 always @(new_address)
 begin
     next_instruction <= new_address;
-    next_address = new_address + 1;
+    next_address <= new_address + 1;
 end
 
 endmodule
