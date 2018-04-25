@@ -10,7 +10,7 @@ module execute (new_address, zero, ALU_result, next_address,
    reg [31:0] ALU_input2;
    
    always@(read_data_1,read_data_2,extended_offset,ALU_op,ALU_src) begin
-       ALU_input2 = (ALU_src == 0)? read_data_2 : extended_address;
+       ALU_input2 = (ALU_src == 0)? read_data_2 : extended_offset;
        case(ALU_op)
            2'b00 : ALU_control = 4'b0010; 
            2'b01 : ALU_control = 4'b0110;
@@ -29,3 +29,4 @@ module execute (new_address, zero, ALU_result, next_address,
    end
    
    endmodule
+
