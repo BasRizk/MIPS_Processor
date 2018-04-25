@@ -16,7 +16,6 @@ begin
 	? Comparison: slt, sltu -- DONE
 	*/
 
-
 case(next_opCode)
 
 // Arithmetic: add, sub
