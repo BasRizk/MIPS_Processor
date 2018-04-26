@@ -6,9 +6,9 @@ output reg [31:0] read_data_1, read_data_2, extended_address;
 input [31:0] next_instruction, write_data;
 input clk;
 
-reg [31:0] [31:0] register_file;
+reg [4:0] [31:0] register_file;
 
-reg [25:0] target_address_inst_25_0;
+//reg [25:0] target_address_inst_25_0;
 reg [31:26] inst_31_26;
 reg [25:21] rs_read_reg_1;
 reg [20:16] rt_read_reg_2;
@@ -21,8 +21,9 @@ reg [4:0] write_register;
 
 always@ (posedge clk)
 begin
+
 // Variables for clarification on the fly
-target_address_inst_25_0 <= next_instruction[25:0];
+//target_address_inst_25_0 <= next_instruction[25:0];
 inst_31_26 <= next_instruction[31:26];
 rs_read_reg_1 <= next_instruction[25:21];
 rt_read_reg_2 <= next_instruction[20:16];
@@ -34,7 +35,8 @@ read_data_1 <= register_file[rs_read_reg_1];
 read_data_2 <= register_file[rt_read_reg_2];
 extended_address <= { {16{address_immed[15]}}, address_immed };
 
-write_register <= (ctrl_reg_dest)? rd_inst_15_11: rt_read_reg_2; // RegDest Mux
+// RegDest Mux
+write_register <= (ctrl_reg_dest)? rd_inst_15_11: rt_read_reg_2; 
 
 register_file[write_register] <= (ctrl_reg_write && write_register != 0)?
  write_data: register_file[write_register];
