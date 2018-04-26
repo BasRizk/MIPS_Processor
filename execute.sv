@@ -10,7 +10,7 @@ module execute (new_address, zero, ALU_result,
    reg [3:0] ALU_control;
    reg [31:0] ALU_input2;
    
-   always@(read_data_1,read_data_2,extended_offset,ALU_op,ALU_src) begin
+   always@(posedge clk) begin
        ALU_input2 = (ALU_src == 0)? read_data_2 : extended_offset;
        case(ALU_op)
            2'b00 : ALU_control = 4'b0010; 
@@ -25,7 +25,7 @@ module execute (new_address, zero, ALU_result,
        endcase
    end
    ALU_Unit alu(ALU_result,read_data_1,ALU_input2,ALU_control);
-   always@(extended_offset,old_address) begin
+   always@(posedge clk) begin
         new_address <= old_address + extended_offset; 
    end
    
