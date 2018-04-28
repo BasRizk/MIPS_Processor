@@ -2,7 +2,8 @@ module main_control(regDest, memRead, memToReg,
 	aluOp, memWrite, aluSrc, regWrite, next_opCode);
 
 output reg regDest, memRead, memToReg,
-	aluOp, memWrite, aluSrc, regWrite;
+	memWrite, aluSrc, regWrite;
+output reg [1:0] aluOp;
 input [4:0] next_opCode;
 
 always @ (next_opCode)
