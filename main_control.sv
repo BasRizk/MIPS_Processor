@@ -18,7 +18,7 @@ begin
 			regDest <= 1;
 			memRead <= 0;
 			memToReg <= 0;
-			aluOp <= 1;
+			aluOp <= 2'b10;
 			memWrite <= 0;
 			aluSrc <= 0;
 			regWrite <= 1;
@@ -30,7 +30,7 @@ begin
 			regDest <= 0;
 			memRead <= 0;
 			memToReg <= 0;
-			aluOp <= 1;
+			aluOp <= 2'b10;
 			memWrite <= 0;
 			aluSrc <= 1;
 			regWrite <= 1;
@@ -41,7 +41,7 @@ begin
 			regDest <= 0;
 			memRead <= 1;
 			memToReg <= 1;
-			aluOp <= 0; 
+			aluOp <= 2'b00; 
 			memWrite <= 0;
 			aluSrc <= 1;
 			regWrite <= 1;
@@ -53,7 +53,7 @@ begin
 			//regDest <= 1;
 			memRead <= 0;
 			//memToReg <= X;
-			aluOp <= 0;
+			aluOp <= 2'b00;
 			memWrite <= 1;
 			aluSrc <= 1;
 			regWrite <= 0;
@@ -65,7 +65,7 @@ begin
 			regDest <= 0;
 			memRead <= 1;
 			memToReg <= 1;
-			aluOp <= 0;
+			aluOp <= 2'b00;
 			memWrite <= 0;
 			aluSrc <= 1;
 			regWrite <= 1;
@@ -77,7 +77,7 @@ begin
 			regDest <= 0;
 			memRead <= 1;
 			memToReg <= 1;
-			aluOp <= 0;
+			aluOp <= 2'b00;
 			memWrite <= 0;
 			aluSrc <= 1;
 			regWrite <= 1;
@@ -89,7 +89,7 @@ begin
 			//regDest <= X;
 			memRead <= 0;
 			//memToReg <= X ;
-			aluOp <= 0;
+			aluOp <= 2'b01;
 			memWrite <= 0;
 			aluSrc <= 0;
 			regWrite <= 0;
