@@ -1,8 +1,8 @@
-module instruction_fetch (next_instruction ,next_address, current_address, clk);
+module instruction_fetch (next_instruction ,next_address, current_address, clk, reset);
 
 output reg [31:0] next_instruction, next_address;
 input [31:0] current_address;
-input clk;
+input clk, reset;
 
 reg [7:0] i_mem [255:0];  // The size of the memory is based on 2^28. 28 are the bits PC[27:0] used as address index
                           // The 2^28 does not work, so 255 is used for now

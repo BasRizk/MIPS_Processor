@@ -1,113 +1,127 @@
 module main_control(regDest, memRead, memToReg,
-	aluOp, memWrite, aluSrc, regWrite, next_opCode);
+	aluOp, memWrite, aluSrc, regWrite, next_opCode, reset);
 
 output reg regDest, memRead, memToReg,
 	memWrite, aluSrc, regWrite;
 output reg [1:0] aluOp;
 input [4:0] next_opCode;
+input reset;
 
-always @ (next_opCode)
+always @ (next_opCode or negedge reset)
 begin
 
-	case(next_opCode)
+	// Set next_opCode to a value that goes to default, and reset parameters
+	if(~reset) begin
+		regDest <= 0;
+		memRead <= 0;
+		memToReg <= 0 ;
+		aluOp <= 0;
+		memWrite <= 0;
+		aluSrc <= 0;
+		regWrite <= 0;
+	end
+	else begin
+		case(next_opCode)
 
-		// Arithmetic: add, sub
-		// Logic: and, or, sll, srl, and, or
-		// Comparison: slt, sltu
-		'h0:
-		begin
-			regDest <= 1;
-			memRead <= 0;
-			memToReg <= 0;
-			aluOp <= 2'b10;
-			memWrite <= 0;
-			aluSrc <= 0;
-			regWrite <= 1;
-		end
+			// Arithmetic: add, sub
+			// Logic: and, or, sll, srl, and, or
+			// Comparison: slt, sltu
+			'h0:
+			begin
+				regDest <= 1;
+				memRead <= 0;
+				memToReg <= 0;
+				aluOp <= 2'b10;
+				memWrite <= 0;
+				aluSrc <= 0;
+				regWrite <= 1;
+			end
 
-		// Arithmetic: addi
-		'h8:
-		begin
-			regDest <= 0;
-			memRead <= 0;
-			memToReg <= 0;
-			aluOp <= 2'b10;
-			memWrite <= 0;
-			aluSrc <= 1;
-			regWrite <= 1;
-		end
-		// Load: lw
-		'h23:
-		begin
-			regDest <= 0;
-			memRead <= 1;
-			memToReg <= 1;
-			aluOp <= 2'b00; 
-			memWrite <= 0;
-			aluSrc <= 1;
-			regWrite <= 1;
-		end
+			// Arithmetic: addi
+			'h8:
+			begin
+				regDest <= 0;
+				memRead <= 0;
+				memToReg <= 0;
+				aluOp <= 2'b10;
+				memWrite <= 0;
+				aluSrc <= 1;
+				regWrite <= 1;
+			end
+			// Load: lw
+			'h23:
+			begin
+				regDest <= 0;
+				memRead <= 1;
+				memToReg <= 1;
+				aluOp <= 2'b00; 
+				memWrite <= 0;
+				aluSrc <= 1;
+				regWrite <= 1;
+			end
 
-		// Store: sw
-		'h2B:
-		begin
-			//regDest <= 1;
-			memRead <= 0;
-			//memToReg <= X;
-			aluOp <= 2'b00;
-			memWrite <= 1;
-			aluSrc <= 1;
-			regWrite <= 0;
-		end
+			// Store: sw
+			'h2B:
+			begin
+				//regDest <= 1;
+				memRead <= 0;
+				//memToReg <= X;
+				aluOp <= 2'b00;
+				memWrite <= 1;
+				aluSrc <= 1;
+				regWrite <= 0;
+			end
 
-		// Load: lh
-		'h21:
-		begin
-			regDest <= 0;
-			memRead <= 1;
-			memToReg <= 1;
-			aluOp <= 2'b00;
-			memWrite <= 0;
-			aluSrc <= 1;
-			regWrite <= 1;
-		end
+			// Load: lh
+			'h21:
+			begin
+				regDest <= 0;
+				memRead <= 1;
+				memToReg <= 1;
+				aluOp <= 2'b00;
+				memWrite <= 0;
+				aluSrc <= 1;
+				regWrite <= 1;
+			end
 
-		// Load: lhu
-		'h25:
-		begin
-			regDest <= 0;
-			memRead <= 1;
-			memToReg <= 1;
-			aluOp <= 2'b00;
-			memWrite <= 0;
-			aluSrc <= 1;
-			regWrite <= 1;
-		end
+			// Load: lhu
+			'h25:
+			begin
+				regDest <= 0;
+				memRead <= 1;
+				memToReg <= 1;
+				aluOp <= 2'b00;
+				memWrite <= 0;
+				aluSrc <= 1;
+				regWrite <= 1;
+			end
 
-		// Branch: beq
-		'h4:
-		begin
-			//regDest <= X;
-			memRead <= 0;
-			//memToReg <= X ;
-			aluOp <= 2'b01;
-			memWrite <= 0;
-			aluSrc <= 0;
-			regWrite <= 0;
-		end
+			// Branch: beq
+			'h4:
+			begin
+				//regDest <= X;
+				memRead <= 0;
+				//memToReg <= X ;
+				aluOp <= 2'b01;
+				memWrite <= 0;
+				aluSrc <= 0;
+				regWrite <= 0;
+			end
 
-		default:
-		begin
-			regDest <= 0;
-			memRead <= 0;
-			memToReg <= 0 ;
-			aluOp <= 0;
-			memWrite <= 0;
-			aluSrc <= 0;
-			regWrite <= 0;
-		end
+			default:
+			begin
+				regDest <= 0;
+				memRead <= 0;
+				memToReg <= 0 ;
+				aluOp <= 0;
+				memWrite <= 0;
+				aluSrc <= 0;
+				regWrite <= 0;
+			end
 
-	endcase
+		endcase
+	end
+	
 end
 
 endmodule

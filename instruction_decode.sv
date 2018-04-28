@@ -1,13 +1,12 @@
 module instruction_decode ( read_data_1, read_data_2, extended_address,
- next_instruction, write_data, clk, ctrl_reg_dest, ctrl_reg_write);
+ next_instruction, write_data, clk, ctrl_reg_dest, ctrl_reg_write, reset);
 
     output reg ctrl_reg_dest, ctrl_reg_write;
     output reg [31:0] read_data_1, read_data_2, extended_address;
     input [31:0] next_instruction, write_data;
-    input clk;
+    input clk, reset;
 
-    reg [31:0] [31:0] register_file;
-    register_file[0] = 0;
+    reg [31:0] [31:0] register_file = 0;
 
     //reg [25:0] target_address_inst_25_0;
     reg [31:26] inst_31_26;
@@ -20,8 +19,17 @@ module instruction_decode ( read_data_1, read_data_2, extended_address,
 
     //assign write_register = (ctrl_reg_dest)? next_instruction[15:11]:next_instruction[20:16];
 
-    always@ (posedge clk)
+    always@ (posedge clk or negedge reset)
     begin
+        if(~reset)
+        begin
+            inst_31_26 <= 0;
+            rs_read_reg_1 <= 0;
+            rt_read_reg_2 <= 0;
+            rd_inst_15_11 <= 0;
+            address_immed <= 0;
+        end
+
 
         // Variables for clarification on the fly
         //target_address_inst_25_0 <= next_instruction[25:0];
