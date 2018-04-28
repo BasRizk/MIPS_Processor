@@ -4,7 +4,8 @@ output reg [31:0] wb_data;
 input [31:0] read_data, alu_result;
 input clk, MemtoReg;
 
-always@(posedge clk)
+// neg edge clk as the same time instruction_decode at posedge clk
+always@(negedge clk)
 begin
     wb_data <= MemtoReg ? read_data : alu_result;
 end

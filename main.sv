@@ -11,7 +11,8 @@ wire [31:0] alu_result, mem_address, read_data_from_mem, wb_data;
 
 // Ctrl Wires
 wire ctrl_regDest, ctrl_branch, ctrl_memRead, ctr_memToReg,
-	ctrl_aluOp, ctr_memWrite, ctrl_aluSrc, ctrl_regWrite;
+	 ctr_memWrite, ctrl_aluSrc, ctrl_regWrite;
+wire [1:0] ctrl_aluOp;
 
 
 assign write_data_into_mem = read_data_2;			// after exec to mem
