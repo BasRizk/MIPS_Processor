@@ -1,8 +1,12 @@
 module main(alu_result, instruction_mem, clk, reset);
 
 output reg [31:0] alu_result;
+
 input [7:0] instruction_mem [255:0];
 input clk, reset;
+
+wire [31:0] [31:0] register_file;
+wire [4:0] write_register;
 
 // Datapath Wires
 wire [31:0] branch_or_not_address, supposed_next_address,
@@ -33,7 +37,7 @@ main_control ctrl (ctrl_regDest, ctrl_branch, ctrl_memRead,
 instruction_fetch IF (next_instruction ,supposed_next_address,
 	branch_or_not_address, instruction_mem, ctrl_pcSrc, clk, reset);
 
-instruction_decode ID (register_file, read_data_1, read_data_2, extended_branch_offset,
+instruction_decode ID (register_file, write_register, read_data_1, read_data_2, extended_branch_offset,
 	next_instruction, write_data_into_reg, ctrl_regDest, ctrl_regWrite,
 	clk, reset);
 

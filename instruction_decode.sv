@@ -1,4 +1,4 @@
-module instruction_decode (register_file, read_data_1, read_data_2, extended_branch_offset,
+module instruction_decode (register_file, write_register, read_data_1, read_data_2, extended_branch_offset,
     next_instruction, write_data_into_reg, ctrl_regDest, ctrl_regWrite, clk, reset);
 
     output reg [31:0] read_data_1, read_data_2, extended_branch_offset;
@@ -15,7 +15,7 @@ module instruction_decode (register_file, read_data_1, read_data_2, extended_bra
     reg [15:11] rd_inst_15_11;
     reg [15:0] address_immed;
 
-    wire [4:0] write_register;
+    output reg [4:0] write_register;
 
     assign write_register = (ctrl_regDest)? rd_inst_15_11: rt_read_reg_2; 
 

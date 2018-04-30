@@ -24,7 +24,7 @@ begin
 	$monitor("time", $time, " alu_result = %b", alu_result);
 end
 
-initial #500 $finish;
+initial #600 $finish;
 
 
 endmodule

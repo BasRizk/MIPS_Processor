@@ -12,18 +12,19 @@ module execute (branch_or_not_address, zero, ALU_result, read_data_1, read_data_
 
    reg [3:0] ALU_control;
    reg [31:0] ALU_input2;
-   
+
+    assign ALU_input2 = (ctrl_aluSrc == 0)? read_data_2 : extended_branch_offset;
+
    always@(posedge clk or negedge reset) begin
-       ALU_input2 = (ctrl_aluSrc == 0)? read_data_2 : extended_branch_offset;
        case(ctrl_aluOp)
            2'b00 : ALU_control = 4'b0010; 
            2'b01 : ALU_control = 4'b0110;
            2'b10 : case(extended_branch_offset[5:0])
-                   6'b100000 : ALU_control <= 4'b0010;
-                   6'b100010 : ALU_control <= 4'b0110;
-                   6'b100100 : ALU_control <= 4'b0000;
-                   6'b100101 : ALU_control <= 4'b0001;
-                   6'b101010 : ALU_control <= 4'b0111;
+                   6'b100000 : ALU_control = 4'b0010;
+                   6'b100010 : ALU_control = 4'b0110;
+                   6'b100100 : ALU_control = 4'b0000;
+                   6'b100101 : ALU_control = 4'b0001;
+                   6'b101010 : ALU_control = 4'b0111;
                endcase
        endcase
    end
