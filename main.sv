@@ -33,7 +33,7 @@ main_control ctrl (ctrl_regDest, ctrl_branch, ctrl_memRead,
 instruction_fetch IF (next_instruction ,supposed_next_address,
 	branch_or_not_address, instruction_mem, ctrl_pcSrc, clk, reset);
 
-instruction_decode ID (read_data_1, read_data_2, extended_branch_offset,
+instruction_decode ID (register_file, read_data_1, read_data_2, extended_branch_offset,
 	next_instruction, write_data_into_reg, ctrl_regDest, ctrl_regWrite,
 	clk, reset);
 

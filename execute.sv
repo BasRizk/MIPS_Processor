@@ -2,8 +2,9 @@ module execute (branch_or_not_address, zero, ALU_result, read_data_1, read_data_
     extended_branch_offset, supposed_next_address, ctrl_aluOp, ctrl_aluSrc,
     clk, reset);
    
-   output reg [31:0] branch_or_not_address, ALU_result;
-   output reg zero; 
+   output reg [31:0] branch_or_not_address, ALU_result = 0;
+   output reg zero = 0; 
+   
    input [31:0] read_data_1, read_data_2, extended_branch_offset,supposed_next_address;
    input [1:0] ctrl_aluOp;
    input ctrl_aluSrc;

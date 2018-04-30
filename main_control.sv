@@ -3,18 +3,21 @@ module main_control(ctrl_regDest, ctrl_branch, ctrl_memRead, ctrl_memToReg,
 	next_opCode, reset);
 
 output reg ctrl_regDest, ctrl_branch, ctrl_memRead, ctrl_memToReg,
-	ctrl_memWrite, ctrl_aluSrc, ctrl_regWrite;
-output reg [1:0] ctrl_aluOp;
+	ctrl_memWrite, ctrl_aluSrc, ctrl_regWrite = 0;
+output reg [1:0] ctrl_aluOp = 0;
 input [5:0] next_opCode;
 input reset;
 
-always @ (next_opCode or negedge reset)
+wire [7:0] opcode_extended;
+assign opcode_extended = {{{2'b00}}, next_opCode };
+
+always @ (opcode_extended or negedge reset)
 begin
 
 	// Set next_opCode to a value that goes to default, and reset parameters
 	if(~reset) begin
 		ctrl_regDest = 0;
-		ctrl_branch = 0;  //TODO this everywhere
+		ctrl_branch = 0;  //TODO this everywhere, or maybe somewhere else
 		ctrl_memRead = 0;
 		ctrl_memToReg = 0 ;
 		ctrl_aluOp = 0;
@@ -23,7 +26,8 @@ begin
 		ctrl_regWrite = 0;
 	end
 	else begin
-		case(next_opCode)
+
+		case(opcode_extended)
 
 			// Arithmetic: add, sub
 			// Logic: and, or, sll, srl, and, or
