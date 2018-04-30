@@ -19,8 +19,11 @@ module execute (branch_or_not_address, supposed_next_address_pass, zero, ALU_res
 
    always@(posedge clk or negedge reset) begin
        case(ctrl_aluOp)
-           2'b00 : ALU_control = 4'b0010; 
-           2'b01 : ALU_control = 4'b0110;
+            2'b00 : ALU_control = 4'b0010; 
+            2'b01 : begin 
+                ALU_control = 4'b0110;
+                zero = 1;
+            end   
            2'b10 : case(extended_branch_offset[5:0])
                    6'b100000 : ALU_control = 4'b0010;
                    6'b100010 : ALU_control = 4'b0110;
