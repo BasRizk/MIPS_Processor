@@ -10,7 +10,7 @@ wire [4:0] write_register;
 
 // Datapath Wires
 wire [31:0] branch_or_not_address, supposed_next_address,
-	next_instruction;
+	supposed_next_address_pass, next_instruction;
 wire [31:0] read_data_1, read_data_2, write_data_into_mem,
 		write_data_into_reg, extended_branch_offset;
 wire zero;
@@ -23,9 +23,9 @@ wire ctrl_regDest, ctrl_branch, ctrl_memRead, ctr_memToReg,
 wire [1:0] ctrl_aluOp;
 
 
-assign write_data_into_mem = read_data_2;			// after exec to mem
-assign mem_address = alu_result;					// after exec to mem
-assign write_data_into_reg = wb_data;				// after wb to regs file
+assign write_data_into_mem = read_data_2;		// after exec to mem
+assign mem_address = alu_result;				// after exec to mem
+assign write_data_into_reg = wb_data;			// after wb to regs file
 
 
 // CONTROLERS
@@ -35,14 +35,17 @@ main_control ctrl (ctrl_regDest, ctrl_branch, ctrl_memRead,
 
 // DATA PATH
 instruction_fetch IF (next_instruction ,supposed_next_address,
-	branch_or_not_address, instruction_mem, ctrl_pcSrc, clk, reset);
+	branch_or_not_address, supposed_next_address_pass,
+	instruction_mem, ctrl_pcSrc, clk, reset);
 
-instruction_decode ID (register_file, write_register, read_data_1, read_data_2, extended_branch_offset,
-	next_instruction, write_data_into_reg, ctrl_regDest, ctrl_regWrite,
+instruction_decode ID (register_file, write_register, read_data_1,
+	read_data_2, extended_branch_offset, next_instruction,
+	write_data_into_reg, ctrl_regDest, ctrl_regWrite,
 	clk, reset);
 
-execute EX (branch_or_not_address, zero, alu_result, read_data_1,
-	read_data_2, extended_branch_offset, supposed_next_address,
+execute EX (branch_or_not_address, supposed_next_address_pass,
+	zero, alu_result, read_data_1, read_data_2,
+	extended_branch_offset, supposed_next_address,
 	ctrl_aluOp, ctrl_aluSrc, clk, reset);
 
 memory_access MEM(ctrl_pcSrc,

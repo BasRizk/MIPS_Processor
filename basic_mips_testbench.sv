@@ -24,7 +24,7 @@ begin
 	$monitor("time", $time, " alu_result = %b", alu_result);
 end
 
-initial #600 $finish;
+initial #1000 $finish; // 5 Clock cycles
 
 
 endmodule

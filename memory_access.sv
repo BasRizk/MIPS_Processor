@@ -3,7 +3,7 @@ module memory_access (
     ctrl_branch, zero, ctrl_memRead, ctrl_memWrite, clk, reset);
 
 output reg ctrl_pcSrc = 0;
-output reg [31:0] read_data_from_mem = 0;
+output reg [31:0] read_data_from_mem;
 
 input ctrl_branch, zero , ctrl_memRead , ctrl_memWrite;
 input [31:0] mem_address, write_data_into_mem;

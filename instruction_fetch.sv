@@ -1,8 +1,8 @@
 module instruction_fetch (next_instruction ,supposed_next_address,
-    branch_or_not_address, i_mem, ctrl_pcSrc, clk, reset);
+    branch_or_not_address, supposed_next_address_pass, i_mem, ctrl_pcSrc, clk, reset);
 
-output reg [31:0] next_instruction, supposed_next_address = 0;
-input [31:0] branch_or_not_address;
+output reg [31:0] next_instruction, supposed_next_address;
+input [31:0] branch_or_not_address, supposed_next_address_pass;
 input ctrl_pcSrc; // == 1 then to use branch address
 input clk, reset;
 input reg [7:0] i_mem [255:0];  // The size of the memory is based on 2^28. 28 are the bits PC[27:0] used as address index
@@ -10,8 +10,7 @@ input reg [7:0] i_mem [255:0];  // The size of the memory is based on 2^28. 28 a
 
 wire [31:0] target_address = 0;
 
-assign target_address = 0;
-// TODO add (ctrl_pcSrc)? branch_or_not_address : supposed_next_address;
+assign target_address = (ctrl_pcSrc)? branch_or_not_address : supposed_next_address_pass;
 
 always @(posedge clk)
 begin
