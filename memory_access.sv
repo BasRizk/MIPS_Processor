@@ -1,27 +1,35 @@
-module memory_access (read_data, new_address, address_mem, write_data,
-    branch, zero, MemRead, MemWrite, clk, reset);
+module memory_access (
+    ctrl_pcSrc, read_data_from_mem, mem_address, write_data_into_mem,
+    ctrl_branch, zero, ctrl_memRead, ctrl_memWrite, clk, reset);
 
-output reg [31:0] read_data;
-input zero , MemRead , MemWrite, branch;
-input [31:0] new_address, address_mem, write_data;
+output reg ctrl_pcSrc;
+output reg [31:0] read_data_from_mem;
+
+input ctrl_branch, zero , ctrl_memRead , ctrl_memWrite;
+input [31:0] mem_address, write_data_into_mem;
 input clk, reset;
 
 
-reg [31:0] [31:0] memory;
-reg [31:0] selected_address;
+reg [1023:0] [31:0] memory;
 
-always@ (posedge clk)
+always@ (posedge clk or negedge reset)
 begin
 
-    selected_address <= (zero & branch) ? new_address : address_mem; 
-    if (MemRead == 1)
+    if(~reset)
     begin
-        read_data <= memory[new_address];
+        memory <= 0;
+    end
+
+    ctrl_pcSrc <= (ctrl_branch && zero) ? 1 : 0; 
+    
+    if (ctrl_memRead == 1)
+    begin
+        read_data_from_mem <= memory[mem_address];
     end
     
-    if (MemWrite == 1)
+    if (ctrl_memWrite == 1)
     begin
-        memory[new_address] <= write_data;
+        memory[mem_address] <= write_data_into_mem;
     end
 
 
