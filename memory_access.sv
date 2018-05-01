@@ -1,4 +1,4 @@
-module memory_access (
+module memory_access ( memory,
     ctrl_pcSrc, read_data_from_mem, mem_address, write_data_into_mem,
     ctrl_branch, zero, ctrl_memRead, ctrl_memWrite, clk, reset);
 
@@ -10,7 +10,7 @@ input [31:0] mem_address, write_data_into_mem;
 input clk, reset;
 
 
-reg [1023:0] [31:0] memory;
+output reg [1023:0] [31:0] memory = 0;
 
 always@ (posedge clk or negedge reset)
 begin

@@ -18,7 +18,7 @@ begin
 	// Set next_opCode to a value that goes to default, and reset parameters
 	if(~reset) begin
 		ctrl_regDest = 0;
-		ctrl_branch = 0;  //TODO this everywhere, or maybe somewhere else
+		ctrl_branch = 0;
 		ctrl_memRead = 0;
 		ctrl_memToReg = 0 ;
 		ctrl_aluOp = 0;
@@ -36,6 +36,7 @@ begin
 			'h0:
 			begin
 				ctrl_regDest = 1;
+				ctrl_branch = 0;
 				ctrl_memRead = 0;
 				ctrl_memToReg = 0;
 				ctrl_aluOp = 2'b10;
@@ -59,6 +60,7 @@ begin
 			'h23:
 			begin
 				ctrl_regDest = 0;
+				ctrl_branch = 0;
 				ctrl_memRead = 1;
 				ctrl_memToReg = 1;
 				ctrl_aluOp = 2'b00; 
@@ -71,6 +73,7 @@ begin
 			'h2B:
 			begin
 				//ctrl_regDest = 1;
+				ctrl_branch = 0;
 				ctrl_memRead = 0;
 				//ctrl_memToReg = X;
 				ctrl_aluOp = 2'b00;
@@ -83,6 +86,7 @@ begin
 			'h21:
 			begin
 				ctrl_regDest = 0;
+				ctrl_branch = 0;
 				ctrl_memRead = 1;
 				ctrl_memToReg = 1;
 				ctrl_aluOp = 2'b00;
@@ -95,6 +99,7 @@ begin
 			'h25:
 			begin
 				ctrl_regDest = 0;
+				ctrl_branch = 0;
 				ctrl_memRead = 1;
 				ctrl_memToReg = 1;
 				ctrl_aluOp = 2'b00;
@@ -107,6 +112,7 @@ begin
 			'h4:
 			begin
 				//ctrl_regDest = X;
+				ctrl_branch = 1;
 				ctrl_memRead = 0;
 				//ctrl_memToReg = X ;
 				ctrl_aluOp = 2'b01;
@@ -118,6 +124,7 @@ begin
 			default:
 			begin
 				ctrl_regDest = 0;
+				ctrl_branch = 0;
 				ctrl_memRead = 0;
 				ctrl_memToReg = 0 ;
 				ctrl_aluOp = 0;

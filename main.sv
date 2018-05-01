@@ -1,6 +1,7 @@
-module main(alu_result, instruction_mem, clk, reset);
+module main(next_instruction, alu_result, instruction_mem, clk, reset);
 
 output reg [31:0] alu_result;
+output reg [31:0] next_instruction;
 
 input [7:0] instruction_mem [255:0];
 input clk, reset;
@@ -8,9 +9,12 @@ input clk, reset;
 wire [31:0] [31:0] register_file;
 wire [4:0] write_register;
 
+wire [1023:0] [31:0] memory;
+ 
+
 // Datapath Wires
 wire [31:0] branch_or_not_address, supposed_next_address,
-	supposed_next_address_pass, next_instruction;
+	supposed_next_address_pass;
 wire [31:0] read_data_1, read_data_2, write_data_into_mem,
 		write_data_into_reg, extended_branch_offset;
 wire zero;
@@ -48,7 +52,7 @@ execute EX (branch_or_not_address, supposed_next_address_pass,
 	extended_branch_offset, supposed_next_address,
 	ctrl_aluOp, ctrl_aluSrc, clk, reset);
 
-memory_access MEM(ctrl_pcSrc,
+memory_access MEM(memory, ctrl_pcSrc,
 	read_data_from_mem, mem_address, write_data_into_mem,
 	ctrl_branch, zero, ctrl_memRead, ctrl_memWrite, clk, reset);
 
