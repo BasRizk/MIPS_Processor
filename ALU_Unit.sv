@@ -3,7 +3,7 @@ module ALU_Unit(ALU_result,input1,input2,selectionLines);
     input [31:0] input1,input2;
     input [3:0] selectionLines;
     
-    always@(input1 or input2 or selectionLines) begin
+    always@(posedge clk) begin
         case(selectionLines)
             4'b0000 : ALU_result = input1 & input2;
             4'b0001 : ALU_result = input1 | input2;

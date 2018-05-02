@@ -36,7 +36,7 @@ module execute (branch_or_not_address, supposed_next_address_pass, zero, ALU_res
         endcase
     end
 
-    ALU_Unit alu(ALU_result,read_data_1,ALU_input2,ALU_control);
+    ALU_Unit alu(ALU_result,read_data_1,ALU_input2,ALU_control,clk);
    
     always@(posedge clk) begin
         branch_or_not_address <= supposed_next_address + extended_branch_offset * 4; 
