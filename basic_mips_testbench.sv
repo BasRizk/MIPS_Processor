@@ -8,9 +8,12 @@ reg [7:0] instruction_mem [255:0];
 wire [31:0] next_instruction;
 wire [31:0] alu_result;
 
+reg [1:0] countNOP;
+
 
 initial
 begin
+	countNOP = 0;	//ZERO CONSECUTIVE NOP INSTRUCTIONS SEEN 
     clk = 1'b0;
 	reset = 1'b1;
 	instruction_mem = '{default:0};
@@ -51,7 +54,6 @@ begin
 	$display("instruction entered = %h%h%h%h ", instruction_mem[23],
 	instruction_mem[22], instruction_mem[21],instruction_mem[20]);
 
-
 	forever #100 clk = ~clk;
 end
 
@@ -63,11 +65,20 @@ begin
 	$display("time", $time," next_instuction = %b, alu_result = %b",
 	next_instruction, alu_result);
 
-	if(next_instruction == 32'b0000_0000_0000_0000_0000_0000_0000)
-	begin
+	if(next_instruction == 32'b0000_0000_0000_0000_0000_0000_0000) begin
+		countNOP <= countNOP + 1;
 		#600 $finish;
 		// terminate after 3 clk cycles once 
 		// reading a nop instuction
+	end
+	else begin
+		countNOP <= 0;
+	end
+	
+	if(countNOP == 3) begin
+		#200 $finish;
+		// terminate after 1 clk cycle 
+		// once reading a nop instuction
 	end
 end
 

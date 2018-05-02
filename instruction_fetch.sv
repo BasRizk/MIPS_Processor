@@ -30,7 +30,7 @@ begin
 
         supposed_next_address <= target_address + 4;
     end
-    
+ 
 end
 
 endmodule
