@@ -46,9 +46,9 @@ wire [4:0] next_instruction_15_11_id_ex, next_instruction_20_16_id_ex,
 	write_register_ex_mem, write_register_mem_wb;
 // END OF PIPELINE REGISTERS WIRES
 
-assign write_data_into_mem = read_data_2;		// after exec to mem
-assign mem_address = alu_result;				// after exec to mem
-assign write_data_into_reg = wb_data;			// after wb to regs file
+assign write_data_into_mem = read_data_2_ex_mem;		// after exec to mem
+assign mem_address = alu_result_ex_mem;					// after exec to mem
+assign write_data_into_reg = wb_data;					// after wb to regs file
 
 
 // CONTROLERS
@@ -57,30 +57,37 @@ main_control ctrl (ctrl_regDest, ctrl_branch, ctrl_memRead,
 	ctrl_regWrite, next_instruction[31:26], reset);
 
 // DATA PATH
-instruction_fetch IF (next_instruction ,supposed_next_address,
-	branch_or_not_address, supposed_next_address_pass,
+instruction_fetch IF (next_instruction ,supposed_next_address,			// OUTPUTS
+	branch_or_not_address_ex_mem, //supposed_next_address_pass,			// INPUTS, 
+	// Assuming supposed_next_address already have it
 	instruction_mem, ctrl_pcSrc, clk, reset);
 
-instruction_decode ID (register_file, write_register, read_data_1,
-	read_data_2, extended_branch_offset, next_instruction,
-	write_data_into_reg, ctrl_regDest, ctrl_regWrite,
+instruction_decode ID (register_file, read_data_1,						// OUTPUTS
+	read_data_2, extended_branch_offset,							
+	next_instruction, write_data_into_reg,								// INPUTS
+	ctrl_regWrite_mem_wb, write_register_mem_wb, clk, reset);
+
+execute EX (branch_or_not_address, //supposed_next_address_pass,		// OUTPUTS
+	zero, alu_result,
+	read_data_1_id_ex, read_data_2_id_ex,								// INPUTS
+	extended_branch_offset_id_ex, supposed_next_address_id_ex,
+	ctrl_aluOp_id_ex, ctrl_aluSrc_id_ex,
+	next_instruction_20_16_id_ex, next_instruction_15_11_id_ex,			//TODO their work
 	clk, reset);
 
-execute EX (branch_or_not_address, supposed_next_address_pass,
-	zero, alu_result, read_data_1, read_data_2,
-	extended_branch_offset, supposed_next_address,
-	ctrl_aluOp, ctrl_aluSrc, clk, reset);
+memory_access MEM(memory, ctrl_pcSrc,									// OUTPUTS
+	read_data_from_mem,
+	mem_address, write_data_into_mem,									// INPUTS
+	ctrl_branch_ex_mem, zero_ex_mem, ctrl_memRead_ex_mem,
+	ctrl_memWrite_ex_mem, clk, reset);
 
-memory_access MEM(memory, ctrl_pcSrc,
-	read_data_from_mem, mem_address, write_data_into_mem,
-	ctrl_branch, zero, ctrl_memRead, ctrl_memWrite, clk, reset);
-
-write_back WB (wb_data, read_data_from_mem, alu_result,
-	ctrl_memToReg, clk, reset);
+write_back WB (wb_data,													// OUTPUTS						
+	read_data_from_mem_mem_wb, alu_result_mem_wb,						// INPUTS
+	ctrl_memToReg_mem_wb, clk, reset);
 
 // PIPELINE REGISTERS
 if_id IF_ID (next_instruction_if_id, supposed_next_address_if_id,		// OUTPUTS
-	next_instruction, supposed_next_address_id_ex,						// INPUTS
+	next_instruction, supposed_next_address,							// INPUTS
 	clk, reset);
 
 id_ex ID_EX (

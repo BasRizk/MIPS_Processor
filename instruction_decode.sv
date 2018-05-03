@@ -1,14 +1,18 @@
-module instruction_decode (register_file, write_register, read_data_1, read_data_2, extended_branch_offset,
-    next_instruction, write_data_into_reg, ctrl_regDest, ctrl_regWrite, clk, reset);
-
-    //output reg ctrl_branch = 0;
-    output reg [31:0] read_data_1, read_data_2, extended_branch_offset;
-    input [31:0] next_instruction, write_data_into_reg;
-    input ctrl_regDest, ctrl_regWrite;
-    input clk, reset;
+module instruction_decode (
+    register_file, read_data_1,	                                    	// OUTPUTS
+	read_data_2, extended_branch_offset,							
+	next_instruction, write_data_into_reg,								// INPUTS
+	ctrl_regWrite_mem_wb, write_register_mem_wb, clk, reset);
 
     output reg [31:0] [31:0] register_file = 0;
+    output reg [31:0] read_data_1, read_data_2, extended_branch_offset;
+    
+    input [31:0] next_instruction, write_data_into_reg;
+    input ctrl_regWrite_mem_wb;
+    input [4:0] write_register_mem_wb;
+    input clk, reset;
 
+ 
     //reg [25:0] target_address_inst_25_0;
     reg [31:26] inst_31_26;
     reg [25:21] rs_read_reg_1;
@@ -16,9 +20,8 @@ module instruction_decode (register_file, write_register, read_data_1, read_data
     reg [15:11] rd_inst_15_11;
     reg [15:0] address_immed;
 
-    output reg [4:0] write_register;
-
-    assign write_register = (ctrl_regDest)? rd_inst_15_11: rt_read_reg_2; 
+    //ctrl_regDest MUX ------ TODO COPY IN EX STAGE
+    //assign write_register = (ctrl_regDest)? rd_inst_15_11: rt_read_reg_2; 
 
     always@ (posedge clk or negedge reset)
     begin
@@ -44,14 +47,9 @@ module instruction_decode (register_file, write_register, read_data_1, read_data
         read_data_1 = register_file[rs_read_reg_1];
         read_data_2 = register_file[rt_read_reg_2];
         extended_branch_offset = { {16{address_immed[15]}}, address_immed };
-
-       // ctrl_branch <= (((read_data_1 - read_data_2) == 0) && inst_31_26 == 'h4)? 1 : 0;
         
-
-        // RegDest Mux
-
-        register_file[write_register] = (ctrl_regWrite && write_register != 0)?
-        write_data_into_reg: register_file[write_register];
+        register_file[write_register_mem_wb] = (ctrl_regWrite_mem_wb && write_register_mem_wb != 0)?
+        write_data_into_reg: register_file[write_register_mem_wb];
 
     end
 
