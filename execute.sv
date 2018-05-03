@@ -22,14 +22,16 @@ module execute (
     reg [3:0] ALU_control;
     reg [31:0] ALU_input2;
 
+    wire [31:0] alu_mid_result;
+
     always@(posedge clk or negedge reset) begin
         // TODO reset operations
 
+        // ctrl_regDest MUX using ctrl_regDest coming from ID/EX Pipeline Register
         
         ALU_input2 = (ctrl_aluSrc_id_ex == 0)?
             read_data_2_id_ex : extended_branch_offset_id_ex;
 
-        // ctrl_regDest MUX using ctrl_regDest coming from ID/EX Pipeline Register
         write_register = (ctrl_regDest_id_ex)?
             next_instruction_15_11_id_ex: next_instruction_20_16_id_ex; 
 
@@ -47,9 +49,10 @@ module execute (
                     6'b101010 : ALU_control = 4'b0111;
                 endcase
         endcase
+        ALU_result = alu_mid_result;
     end
 
-    ALU_Unit alu(ALU_result,read_data_1_id_ex,ALU_input2,ALU_control,clk);
+    ALU_Unit alu(alu_mid_result,read_data_1_id_ex,ALU_input2,ALU_control,clk);
    
     always@(posedge clk) begin
         branch_or_not_address <= supposed_next_address_id_ex + extended_branch_offset_id_ex * 4; 
