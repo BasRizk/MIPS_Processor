@@ -1,7 +1,9 @@
-module ALU_Unit(ALU_result,input1,input2,selectionLines);
+module ALU_Unit(ALU_result,input1,input2,selectionLines, clk);
     output reg [31:0] ALU_result;
+
     input [31:0] input1,input2;
     input [3:0] selectionLines;
+    input clk;
     
     always@(posedge clk) begin
         case(selectionLines)

@@ -6,9 +6,9 @@ module mem_wb (
 	clk, reset
     );
 
-output ctrl_regWrite_mem_wb, ctrl_memToReg_mem_wb;
-output [31:0] read_data_from_mem_mem_wb, alu_result_mem_wb;
-output [4:0] write_register_mem_wb;
+output reg ctrl_regWrite_mem_wb, ctrl_memToReg_mem_wb;
+output reg [31:0] read_data_from_mem_mem_wb, alu_result_mem_wb;
+output reg [4:0] write_register_mem_wb;
 
 input ctrl_regWrite_ex_mem, ctrl_memToReg_ex_mem;
 input [31:0] read_data_from_mem, alu_result_ex_mem;
@@ -17,6 +17,20 @@ input clk, reset;
 
 always @ (posedge clk or negedge reset)
 begin
+	if(~reset) begin
+		ctrl_regWrite_mem_wb <= 0;
+		ctrl_memToReg_mem_wb <= 0;	
+		read_data_from_mem_mem_wb <= 0;
+		alu_result_mem_wb <= 0;
+		ctrl_regWrite_mem_wb <= 0;	
+	end
+	else begin
+		ctrl_regWrite_mem_wb <= ctrl_regWrite_ex_mem;
+		ctrl_memToReg_mem_wb <= ctrl_memToReg_ex_mem;
+		read_data_from_mem_mem_wb <= read_data_from_mem;
+		alu_result_mem_wb <= alu_result_ex_mem;
+		ctrl_regWrite_mem_wb <= ctrl_regWrite_ex_mem;
+	end
     
 end
 

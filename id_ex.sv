@@ -54,7 +54,7 @@ begin
 		ctrl_regDest_id_ex <= ctrl_regDest;
 		ctrl_aluSrc_id_ex <= ctrl_aluSrc;
 		ctrl_aluOp_id_ex <= ctrl_aluOp;
-		supposed_next_address_id_ex <= supposed_next_address; 
+		supposed_next_address_id_ex <= supposed_next_address_if_id; 
 		read_data_1_id_ex <= read_data_1; 
 		read_data_2_id_ex <= read_data_2;
 		extended_branch_offset_id_ex <= extended_branch_offset; 
