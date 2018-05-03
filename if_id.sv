@@ -6,8 +6,11 @@ output reg [31:0] next_instruction_if_id, supposed_next_address_if_id;
 input [31:0] next_instruction, supposed_next_address;
 input clk, reset;
 
+/*
 always @ (negedge reset or
 	next_instruction or supposed_next_address)
+    */
+always @ (*)
 begin
     if(~reset) begin
         next_instruction_if_id = 0;

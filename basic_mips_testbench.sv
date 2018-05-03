@@ -21,15 +21,22 @@ begin
 	// addi $10, $0, 10 expected $10 = 10
 	$display("addi $10, $0, 10 expected $10 = 10");
 	instruction_mem[3:0] = '{8'h20, 8'h0a, 8'h00, 8'h0a};
-	$display("instruction entered = %h%h%h%h ", instruction_mem[3],
-	instruction_mem[2], instruction_mem[1],instruction_mem[0]);
-	/*
+
+	// addi $12, $0, 11 expected $12 = 11
+	$display("addi $12, $0, 11 expected $12 = 11");
+	instruction_mem[7:4] = '{8'h20, 8'h0c, 8'h00, 8'h0b};
+	
+	$display("NOP");
+	instruction_mem[11:8] = '{8'h00, 8'h00, 8'h00, 8'h00};
+	
+	$display("NOP");
+	instruction_mem[15:12] = '{8'h00, 8'h00, 8'h00, 8'h00};
+	
 	// add $11, $11, $10 expected $11 = 10
 	$display("add $11, $11, $10 expected $11 = 10");
-	instruction_mem[7:4] = '{8'h01, 8'h6a, 8'h58, 8'h20};
-	$display("instruction entered = %h%h%h%h ", instruction_mem[7],
-	instruction_mem[6], instruction_mem[5],instruction_mem[4]);
-
+	instruction_mem[19:16] = '{8'h01, 8'h6a, 8'h58, 8'h20};
+	
+	/*
 	// addi $10, $0, 13 expected  $10 = 13
 	$display("addi $10, $0, 13 expected  $10 = 13");
 	instruction_mem[11:8] = '{8'h20, 8'h0a, 8'h00, 8'h0d};
@@ -59,21 +66,21 @@ end
 
 main MIPS (next_instruction, alu_result, instruction_mem, clk, reset);
 
-always @ (clk or next_instruction or alu_result)
+always @ (clk)
 begin
 	//if(reset == 1'b0) begin reset = 1'b1; end
-	$display("time", $time," next_instuction = %b, alu_result = %b",
+	$display("time", $time," next_instuction = %h, alu_result = %d",
 	next_instruction, alu_result);
 
 	if(next_instruction == 32'b0000_0000_0000_0000_0000_0000_0000) begin
 		countNOP <= countNOP + 1;
-		
 	end
 	else begin
 		countNOP <= 0;
 	end
 	
 	if(countNOP == 3) begin
+
 		#200 $finish;
 		// terminate after 1 clk cycle 
 		// once reading a nop instuction

@@ -15,9 +15,13 @@ input [31:0] read_data_from_mem, alu_result_ex_mem;
 input [4:0] write_register_ex_mem;
 input clk, reset;
 
+/*
 always @ (negedge reset or
 	ctrl_regWrite_ex_mem or ctrl_memToReg_ex_mem or read_data_from_mem or		
 	alu_result_ex_mem or write_register_ex_mem)
+	*/
+
+always @ (*)
 begin
 	if(~reset) begin
 		ctrl_regWrite_mem_wb = 0;
