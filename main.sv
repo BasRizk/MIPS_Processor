@@ -58,8 +58,7 @@ main_control ctrl (ctrl_regDest, ctrl_branch, ctrl_memRead,
 
 // DATA PATH
 instruction_fetch IF (next_instruction ,supposed_next_address,			// OUTPUTS
-	branch_or_not_address_ex_mem, //supposed_next_address_pass,			// INPUTS, 
-	// Assuming supposed_next_address already have it
+	branch_or_not_address_ex_mem,										// INPUTS
 	instruction_mem, ctrl_pcSrc, clk, reset);
 
 instruction_decode ID (register_file, read_data_1,						// OUTPUTS
@@ -67,16 +66,14 @@ instruction_decode ID (register_file, read_data_1,						// OUTPUTS
 	next_instruction, write_data_into_reg,								// INPUTS
 	ctrl_regWrite_mem_wb, write_register_mem_wb, clk, reset);
 
-execute EX (branch_or_not_address, //supposed_next_address_pass,		// OUTPUTS
-	zero, alu_result, write_register,
+execute EX (branch_or_not_address, zero, alu_result, write_register,	// OUTPUTS
 	read_data_1_id_ex, read_data_2_id_ex,								// INPUTS
 	extended_branch_offset_id_ex, supposed_next_address_id_ex,
 	ctrl_aluOp_id_ex, ctrl_aluSrc_id_ex,
-	next_instruction_20_16_id_ex, next_instruction_15_11_id_ex,			//TODO their work
-	clk, reset);
+	next_instruction_20_16_id_ex, next_instruction_15_11_id_ex,
+	ctrl_regDest_id_ex, clk, reset);
 
-memory_access MEM(memory, ctrl_pcSrc,									// OUTPUTS
-	read_data_from_mem,
+memory_access MEM(memory, ctrl_pcSrc, read_data_from_mem,				// OUTPUTS
 	mem_address, write_data_into_mem,									// INPUTS
 	ctrl_branch_ex_mem, zero_ex_mem, ctrl_memRead_ex_mem,
 	ctrl_memWrite_ex_mem, clk, reset);
