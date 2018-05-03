@@ -37,7 +37,7 @@ module execute (
             2'b00 : ALU_control = 4'b0010; 
             2'b01 : begin 
                 ALU_control = 4'b0110;
-                zero = 1;
+                zero = (read_data_1_id_ex == read_data_2_id_ex)? 1 : 0;
             end   
             2'b10 : case(extended_branch_offset_id_ex[5:0])
                     6'b100000 : ALU_control = 4'b0010;
