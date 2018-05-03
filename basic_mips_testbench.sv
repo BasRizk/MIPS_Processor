@@ -72,6 +72,7 @@ begin
 	$display("time", $time," next_instuction = %h, alu_result = %d",
 	next_instruction, alu_result);
 
+/*
 	if(next_instruction == 32'b0000_0000_0000_0000_0000_0000_0000) begin
 		countNOP <= countNOP + 1;
 	end
@@ -85,7 +86,10 @@ begin
 		// terminate after 1 clk cycle 
 		// once reading a nop instuction
 	end
+	*/
 end
+
+initial #1800 $finish;
 
 
 endmodule

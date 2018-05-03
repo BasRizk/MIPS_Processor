@@ -19,18 +19,18 @@ reg [31:0] target_address = 0;
 always @(posedge clk or negedge reset)
 begin
     if(~reset) begin
-        next_instruction <= 0;
-        supposed_next_address <= 0;
+        next_instruction = 0;
+        supposed_next_address = 0;
     end
     else begin
-        target_address <= (ctrl_pcSrc)? branch_or_not_address_ex_mem : supposed_next_address;
+        target_address = (ctrl_pcSrc)? branch_or_not_address_ex_mem : supposed_next_address;
 
-        next_instruction <= {{i_mem[target_address[27:0] + 3]},
+        next_instruction = {{i_mem[target_address[27:0] + 3]},
                         {i_mem[target_address[27:0] + 2]},
                         {i_mem[target_address[27:0] + 1]},
                         {i_mem[target_address[27:0] + 0]}};
 
-        supposed_next_address <= target_address + 4;
+        supposed_next_address = target_address + 4;
     end
  
 end
