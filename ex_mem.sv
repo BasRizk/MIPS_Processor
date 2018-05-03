@@ -19,31 +19,34 @@ input [31:0] branch_or_not_address, alu_result, read_data_2_id_ex;
 input [4:0] write_register;
 input clk, reset;
 
-always @ (posedge clk or negedge reset)
+always @ (negedge reset or
+	ctrl_regWrite_id_ex or ctrl_memToReg_id_ex or ctrl_branch_id_ex or
+	ctrl_memRead_id_ex or ctrl_memWrite_id_ex or branch_or_not_address or
+	zero, alu_result or read_data_2_id_ex or write_register)
 begin
 	if(~reset) begin
-		ctrl_regWrite_ex_mem <= 0;
-		ctrl_memToReg_ex_mem <= 0;
-		ctrl_branch_ex_mem <= 0;
-		ctrl_memRead_ex_mem <= 0;
-		ctrl_memWrite_ex_mem <= 0;
-		zero_ex_mem <= 0;
-		branch_or_not_address_ex_mem <= 0;
-		alu_result_ex_mem <= 0;
-		read_data_2_ex_mem <= 0;
-		write_register_ex_mem <= 0;
+		ctrl_regWrite_ex_mem = 0;
+		ctrl_memToReg_ex_mem = 0;
+		ctrl_branch_ex_mem = 0;
+		ctrl_memRead_ex_mem = 0;
+		ctrl_memWrite_ex_mem = 0;
+		zero_ex_mem = 0;
+		branch_or_not_address_ex_mem = 0;
+		alu_result_ex_mem = 0;
+		read_data_2_ex_mem = 0;
+		write_register_ex_mem = 0;
 	end
 	else begin
-		ctrl_regWrite_ex_mem <= ctrl_regWrite_id_ex;
-		ctrl_memToReg_ex_mem <= ctrl_memToReg_id_ex;
-		ctrl_branch_ex_mem <= ctrl_branch_id_ex;
-		ctrl_memRead_ex_mem <= ctrl_memRead_id_ex;
-		ctrl_memWrite_ex_mem <= ctrl_memWrite_id_ex;
-		zero_ex_mem <= zero;
-		branch_or_not_address_ex_mem <= branch_or_not_address;
-		alu_result_ex_mem <= alu_result;
-		read_data_2_ex_mem <= read_data_2_id_ex;
-		write_register_ex_mem <= write_register;
+		ctrl_regWrite_ex_mem = ctrl_regWrite_id_ex;
+		ctrl_memToReg_ex_mem = ctrl_memToReg_id_ex;
+		ctrl_branch_ex_mem = ctrl_branch_id_ex;
+		ctrl_memRead_ex_mem = ctrl_memRead_id_ex;
+		ctrl_memWrite_ex_mem = ctrl_memWrite_id_ex;
+		zero_ex_mem = zero;
+		branch_or_not_address_ex_mem = branch_or_not_address;
+		alu_result_ex_mem = alu_result;
+		read_data_2_ex_mem = read_data_2_id_ex;
+		write_register_ex_mem = write_register;
 	end
     
 end

@@ -12,8 +12,7 @@ wire [4:0] write_register;
 wire [1023:0] [31:0] memory;
  
 // Datapath Wires
-wire [31:0] branch_or_not_address, supposed_next_address,
-	supposed_next_address_pass;
+wire [31:0] branch_or_not_address, supposed_next_address;
 wire [31:0] read_data_1, read_data_2, write_data_into_mem,
 		write_data_into_reg, extended_branch_offset;
 wire zero;

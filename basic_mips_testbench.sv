@@ -23,7 +23,7 @@ begin
 	instruction_mem[3:0] = '{8'h20, 8'h0a, 8'h00, 8'h0a};
 	$display("instruction entered = %h%h%h%h ", instruction_mem[3],
 	instruction_mem[2], instruction_mem[1],instruction_mem[0]);
-
+	/*
 	// add $11, $11, $10 expected $11 = 10
 	$display("add $11, $11, $10 expected $11 = 10");
 	instruction_mem[7:4] = '{8'h01, 8'h6a, 8'h58, 8'h20};
@@ -53,7 +53,7 @@ begin
 	instruction_mem[23:20] = '{8'h8d, 8'h4d, 8'h00, 8'h00};
 	$display("instruction entered = %h%h%h%h ", instruction_mem[23],
 	instruction_mem[22], instruction_mem[21],instruction_mem[20]);
-
+	*/
 	forever #100 clk = ~clk;
 end
 
@@ -67,9 +67,7 @@ begin
 
 	if(next_instruction == 32'b0000_0000_0000_0000_0000_0000_0000) begin
 		countNOP <= countNOP + 1;
-		#600 $finish;
-		// terminate after 3 clk cycles once 
-		// reading a nop instuction
+		
 	end
 	else begin
 		countNOP <= 0;

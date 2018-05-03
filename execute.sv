@@ -25,12 +25,14 @@ module execute (
     assign ALU_input2 = (ctrl_aluSrc_id_ex == 0)?
         read_data_2_id_ex : extended_branch_offset_id_ex;
 
-    // ctrl_regDest MUX using ctrl_regDest coming from ID/EX Pipeline Register
-    assign write_register = (ctrl_regDest_id_ex)?
-        next_instruction_15_11_id_ex: next_instruction_20_16_id_ex; 
 
     always@(posedge clk or negedge reset) begin
         // TODO reset operations
+
+        // ctrl_regDest MUX using ctrl_regDest coming from ID/EX Pipeline Register
+        write_register = (ctrl_regDest_id_ex)?
+            next_instruction_15_11_id_ex: next_instruction_20_16_id_ex; 
+
         case(ctrl_aluOp_id_ex)
             2'b00 : ALU_control = 4'b0010; 
             2'b01 : begin 
