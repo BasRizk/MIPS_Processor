@@ -68,7 +68,7 @@ instruction_decode ID (register_file, read_data_1,						// OUTPUTS
 	ctrl_regWrite_mem_wb, write_register_mem_wb, clk, reset);
 
 execute EX (branch_or_not_address, //supposed_next_address_pass,		// OUTPUTS
-	zero, alu_result,
+	zero, alu_result, write_register,
 	read_data_1_id_ex, read_data_2_id_ex,								// INPUTS
 	extended_branch_offset_id_ex, supposed_next_address_id_ex,
 	ctrl_aluOp_id_ex, ctrl_aluSrc_id_ex,

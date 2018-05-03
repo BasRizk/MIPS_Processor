@@ -20,8 +20,6 @@ module instruction_decode (
     reg [15:11] rd_inst_15_11;
     reg [15:0] address_immed;
 
-    //ctrl_regDest MUX ------ TODO COPY IN EX STAGE
-    //assign write_register = (ctrl_regDest)? rd_inst_15_11: rt_read_reg_2; 
 
     always@ (posedge clk or negedge reset)
     begin

@@ -1,5 +1,5 @@
 module execute (
-    branch_or_not_address, zero, ALU_result,                            // OUTPUTS
+    branch_or_not_address, zero, ALU_result, write_register             // OUTPUTS
 	read_data_1_id_ex, read_data_2_id_ex,								// INPUTS
 	extended_branch_offset_id_ex, supposed_next_address_id_ex,
 	ctrl_aluOp_id_ex, ctrl_aluSrc_id_ex,
@@ -9,6 +9,7 @@ module execute (
 
     output reg [31:0] branch_or_not_address, ALU_result;
     output reg zero = 0; 
+    output reg [4:0] write_register;
 
     input [31:0] read_data_1_id_ex, read_data_2_id_ex, extended_branch_offset_id_ex, 
         supposed_next_address_id_ex;
@@ -23,7 +24,12 @@ module execute (
     reg [31:0] ALU_input2;
 
     //assign supposed_next_address_pass = supposed_next_address;
-    assign ALU_input2 = (ctrl_aluSrc_id_ex == 0)? read_data_2_id_ex : extended_branch_offset_id_ex;
+    assign ALU_input2 = (ctrl_aluSrc_id_ex == 0)?
+        read_data_2_id_ex : extended_branch_offset_id_ex;
+
+    // ctrl_regDest MUX
+    assign write_register = (ctrl_regDest)?
+        next_instruction_15_11_id_ex: next_instruction_20_16_id_ex; 
 
     always@(posedge clk or negedge reset) begin
         // TODO reset operations
