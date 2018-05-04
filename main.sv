@@ -53,7 +53,7 @@ assign write_data_into_reg = wb_data;					// after wb to regs file
 // CONTROLERS
 main_control ctrl (ctrl_regDest, ctrl_branch, ctrl_memRead,
 	ctrl_memToReg, ctrl_aluOp, ctrl_memWrite, ctrl_aluSrc,
-	ctrl_regWrite, next_instruction[31:26], reset);
+	ctrl_regWrite, next_instruction[31:26], clk, reset);
 
 // DATA PATH
 instruction_fetch IF (next_instruction ,supposed_next_address,			// OUTPUTS
