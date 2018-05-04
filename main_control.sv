@@ -5,7 +5,7 @@ module main_control(ctrl_regDest, ctrl_branch, ctrl_memRead, ctrl_memToReg,
 output reg ctrl_regDest = 0, ctrl_branch = 0, ctrl_memRead = 0,
 	ctrl_memToReg = 0, ctrl_memWrite = 0, ctrl_aluSrc = 0,
 	ctrl_regWrite = 0;
-output reg [1:0] ctrl_aluOp = 0, ctrl_halfWord_signed;
+output reg [1:0] ctrl_aluOp = 0, ctrl_halfWord_signed = 0;
 input [5:0] next_opCode;
 input clk, reset;
 
