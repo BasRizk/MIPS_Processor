@@ -53,7 +53,7 @@ begin
 				ctrl_regDest = 0;
 				ctrl_memRead = 0;
 				ctrl_memToReg = 0;
-				ctrl_aluOp = 2'b10;
+				ctrl_aluOp = 2'b11;
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 1;
 				ctrl_regWrite = 1;

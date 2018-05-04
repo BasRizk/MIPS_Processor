@@ -48,6 +48,7 @@ module execute (
                     6'b000000 : ALU_control = 4'b1000;  //sll
                     6'b000010 : ALU_control = 4'b1001;  //srl
                 endcase
+            2'b11 : ALU_control = 4'b0010;
         endcase
         
     end
