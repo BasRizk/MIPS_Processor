@@ -9,7 +9,7 @@ input clk, reset;
 // Wires to trace their signals easily
 wire [31:0] [31:0] register_file;
 wire [4:0] write_register;
-wire [1023:0] [31:0] memory;
+reg [1023:0] [31:0] memory;
  
 // Datapath Wires
 wire [31:0] branch_or_not_address, supposed_next_address;
