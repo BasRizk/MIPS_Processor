@@ -20,8 +20,10 @@ begin
 	
 	// addi $10, $0, 10 expected $10 = 10
 	$display("addi $10, $0, 10 expected $10 = 10");
-	instruction_mem[3:0] = '{8'h20, 8'h0a, 8'h00, 8'h0a};
+	//instruction_mem[3:0] = '{8'h21, 8'h4a, 8'h00, 8'h64};
 
+	instruction_mem[3:0] = '{8'h20, 8'h0a, 8'h00, 8'h0a};
+	
 	// addi $12, $0, 11 expected $12 = 11
 	$display("addi $12, $0, 11 expected $12 = 11");
 	instruction_mem[7:4] = '{8'h20, 8'h0c, 8'h00, 8'h0b};

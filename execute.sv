@@ -28,7 +28,7 @@ module execute (
     ALU_Unit alu(alu_mid_result,read_data_1_id_ex,ALU_input2,ALU_control,clk);
 
     assign  ALU_input2 = (ctrl_aluSrc_id_ex == 0)?
-            read_data_2_id_ex : extended_branch_offset_id_ex;
+            read_data_2_id_ex : {0,extended_branch_offset_id_ex[15:0]};
 
     always@(*) begin
 
