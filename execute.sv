@@ -39,11 +39,14 @@ module execute (
                 zero = (read_data_1_id_ex == read_data_2_id_ex)? 1 : 0;
             end   
             2'b10 : case(extended_branch_offset_id_ex[5:0])
-                    6'b100000 : ALU_control = 4'b0010;
-                    6'b100010 : ALU_control = 4'b0110;
-                    6'b100100 : ALU_control = 4'b0000;
-                    6'b100101 : ALU_control = 4'b0001;
-                    6'b101010 : ALU_control = 4'b0111;
+                    6'b100000 : ALU_control = 4'b0010;  //add
+                    6'b100010 : ALU_control = 4'b0110;  //sub
+                    6'b100100 : ALU_control = 4'b0000;  //and
+                    6'b100101 : ALU_control = 4'b0001;  //or
+                    6'b101010 : ALU_control = 4'b0111;  //slt
+                    6'b101011 : ALU_control = 4'b1011;  //sltu
+                    6'b000000 : ALU_control = 4'b1000;  //sll
+                    6'b000010 : ALU_control = 4'b1001;  //srl
                 endcase
         endcase
         

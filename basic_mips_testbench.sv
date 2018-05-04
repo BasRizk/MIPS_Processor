@@ -139,7 +139,24 @@ begin
 	// lhu $18, 0($10) expected $18 = 0x0000_ffff
 	$display("lhu $18, 0($10) expected $18 = 0x0000ffff");
 	instruction_mem[159:156] = '{8'h95, 8'h52, 8'h00, 8'h00};
-	
+
+	$display("NOP");
+	instruction_mem[163:160] = '{8'h00, 8'h00, 8'h00, 8'h00};
+	$display("NOP");
+	instruction_mem[167:164] = '{8'h00, 8'h00, 8'h00, 8'h00};
+	$display("NOP");
+	instruction_mem[171:168] = '{8'h00, 8'h00, 8'h00, 8'h00};
+
+	// lhu $18, 0($10) expected $18 = 0x0000_00ff
+	$display("srl $20, $18, 2 expected $20 = 0x0000 00ff");
+	// instruction_mem[175:172] = '{8'h00, 8'h12, 8'ha0, 8'h82};
+	instruction_mem[175:172] = '{8'h00, 8'h10, 8'ha0, 8'h82};	// load from $16
+
+	// lhu $18, 0($10) expected $18 = 0x0000_0fff
+	$display("sll $21, $18, 1 expected $21 = 0x0000 0fff");
+	// instruction_mem[179:176] = '{8'h00, 8'h12, 8'ha8, 8'h40};
+	instruction_mem[179:176] = '{8'h00, 8'h10, 8'ha8, 8'h40};	// load from $16
+
 	forever #100 clk = ~clk;
 end
 
