@@ -140,10 +140,8 @@ begin
 
 	$display("NOP");
 	instruction_mem[163:160] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[167:164] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[171:168] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
