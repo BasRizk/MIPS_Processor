@@ -13,10 +13,10 @@ input clk, reset;
 always@(negedge clk or negedge reset)
 begin
     if(~reset) begin
-        wb_data <= 0;
+        wb_data = 0;
     end
     else begin
-        wb_data <= ctrl_memToReg_mem_wb ? read_data_from_mem_mem_wb : alu_result_mem_wb;
+        wb_data = ctrl_memToReg_mem_wb ? read_data_from_mem_mem_wb : alu_result_mem_wb;
     end
 end
 
