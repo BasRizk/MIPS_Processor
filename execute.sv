@@ -21,6 +21,11 @@ module execute (
 
     reg [3:0] ALU_control;
     reg [31:0] ALU_input2;
+    
+    reg [31:0] alu_mid_result;
+
+
+    ALU_Unit alu(alu_mid_result,read_data_1_id_ex,ALU_input2,ALU_control,clk);
 
     assign  ALU_input2 = (ctrl_aluSrc_id_ex == 0)?
             read_data_2_id_ex : extended_branch_offset_id_ex;
@@ -32,13 +37,7 @@ module execute (
     assign branch_or_not_address =
             supposed_next_address_id_ex + extended_branch_offset_id_ex * 4; 
 
-    // wire [31:0] alu_mid_result;
-
-
-    always@(posedge clk or negedge reset) begin
-        // TODO reset operations
-
-        
+    always@(*) begin
 
         case(ctrl_aluOp_id_ex)
             2'b00 : ALU_control = 4'b0010; 
@@ -55,10 +54,11 @@ module execute (
                 endcase
         endcase
         
-        //ALU_result = alu_mid_result;
     end
 
-    ALU_Unit alu(ALU_result,read_data_1_id_ex,ALU_input2,ALU_control,clk);
+    always @ (posedge clk) begin
+        ALU_result = alu_mid_result;
+    end
    
 
 endmodule

@@ -25,23 +25,23 @@ wire ctrl_regDest, ctrl_branch, ctrl_memRead, ctr_memToReg,
 wire [1:0] ctrl_aluOp;
 
 // START PIPELINE REGISTERS WIRES
-reg [31:0] next_instruction_if_id, supposed_next_address_if_id,
+wire [31:0] next_instruction_if_id, supposed_next_address_if_id,
 	supposed_next_address_id_ex;
 
-reg [1:0] ctrl_aluOp_id_ex;
-reg ctrl_regWrite_id_ex, ctrl_memToReg_id_ex, ctrl_branch_id_ex,		//ID/EX CTRL OUTPUT WIRES
+wire [1:0] ctrl_aluOp_id_ex;
+wire ctrl_regWrite_id_ex, ctrl_memToReg_id_ex, ctrl_branch_id_ex,		//ID/EX CTRL OUTPUT WIRES
 	ctrl_memRead_id_ex, ctrl_memWrite_id_ex, ctrl_regDest_id_ex,
 	ctrl_aluSrc_id_ex,
 	ctrl_regWrite_ex_mem, ctrl_memToReg_ex_mem, ctrl_branch_ex_mem,		//EX/MEM CTRL OUTPUT WIRES
 	ctrl_memRead_ex_mem, ctrl_memWrite_ex_mem, zero_ex_mem,
 	ctrl_regWrite_mem_wb, ctrl_memToReg_mem_wb;							//MEM/WB CTRL OUTPUT WIRES
 
-reg [31:0] read_data_1_id_ex, read_data_2_id_ex,						
+wire [31:0] read_data_1_id_ex, read_data_2_id_ex,						
 	read_data_2_ex_mem, extended_branch_offset_id_ex,
 	branch_or_not_address_ex_mem, alu_result_ex_mem,
 	alu_result_mem_wb, read_data_from_mem_mem_wb;
 
-reg [4:0] next_instruction_15_11_id_ex, next_instruction_20_16_id_ex,
+wire [4:0] next_instruction_15_11_id_ex, next_instruction_20_16_id_ex,
 	write_register_ex_mem, write_register_mem_wb;
 // END OF PIPELINE REGISTERS WIRES
 
