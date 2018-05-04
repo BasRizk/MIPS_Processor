@@ -61,7 +61,7 @@ module execute (
         ALU_result = alu_mid_result;
 
         branch_or_not_address =
-            supposed_next_address_id_ex + ((extended_branch_offset_id_ex << 2) * 4); 
+            supposed_next_address_id_ex + (extended_branch_offset_id_ex * 4); 
 
         // ctrl_regDest MUX using ctrl_regDest coming from ID/EX Pipeline Register
         write_register = (ctrl_regDest_id_ex)?
