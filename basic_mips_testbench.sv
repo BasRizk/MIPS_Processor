@@ -25,13 +25,11 @@ begin
 	// addi $12, $0, 11 expected $12 = 11
 	$display("addi $12, $0, 11 expected $12 = 11");
 	instruction_mem[7:4] = '{8'h20, 8'h0c, 8'h00, 8'h0b};
-	
+
 	$display("NOP");
 	instruction_mem[11:8] = '{8'h00, 8'h00, 8'h00, 8'h00};
-	
 	$display("NOP");
 	instruction_mem[15:12] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[19:16] = '{8'h00, 8'h00, 8'h00, 8'h00};
 	
@@ -57,10 +55,8 @@ begin
 
 	$display("NOP");
 	instruction_mem[43:40] = '{8'h00, 8'h00, 8'h00, 8'h00};
-	
 	$display("NOP");
 	instruction_mem[47:44] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[51:48] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
@@ -74,10 +70,8 @@ begin
 
 	$display("NOP");
 	instruction_mem[63:60] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[67:64] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[71:68] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
@@ -87,43 +81,38 @@ begin
 
 	$display("NOP");
 	instruction_mem[79:76] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[83:80] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[87:84] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
+	$display("more add entered");
 	instruction_mem[91:88] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
 	instruction_mem[95:92] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[99:96] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[103:100] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
+	$display("more add entered");
 	instruction_mem[107:104] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
 	instruction_mem[111:108] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[115:112] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[119:116] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
+	$display("more add entered");
 	instruction_mem[123:120] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
 	instruction_mem[127:124] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[131:128] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[135:132] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
@@ -133,10 +122,8 @@ begin
 
 	$display("NOP");
 	instruction_mem[143:140] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[147:144] = '{8'h00, 8'h00, 8'h00, 8'h00};
-
 	$display("NOP");
 	instruction_mem[151:148] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
@@ -160,11 +147,9 @@ begin
 	next_instruction, alu_result);
 
 	if(next_instruction == 0) begin
-		$display(countNOP);
 		countNOP = countNOP + 1;
 	end
 	else begin
-		$display(countNOP);
 		countNOP = 0;
 	end
 	

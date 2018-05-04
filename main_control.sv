@@ -1,11 +1,11 @@
 module main_control(ctrl_regDest, ctrl_branch, ctrl_memRead, ctrl_memToReg,
-	ctrl_aluOp, ctrl_memWrite, ctrl_aluSrc, ctrl_regWrite,
+	ctrl_aluOp, ctrl_memWrite, ctrl_aluSrc, ctrl_regWrite, ctrl_halfWord_signed,
 	next_opCode, clk, reset);
 
 output reg ctrl_regDest = 0, ctrl_branch = 0, ctrl_memRead = 0,
 	ctrl_memToReg = 0, ctrl_memWrite = 0, ctrl_aluSrc = 0,
 	ctrl_regWrite = 0;
-output reg [1:0] ctrl_aluOp = 0;
+output reg [1:0] ctrl_aluOp = 0, ctrl_halfWord_signed;
 input [5:0] next_opCode;
 input clk, reset;
 
@@ -25,6 +25,7 @@ begin
 		ctrl_memWrite = 0;
 		ctrl_aluSrc = 0;
 		ctrl_regWrite = 0;
+		ctrl_halfWord_signed = 0;
 	end
 	else begin
 
@@ -43,6 +44,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 0;
 				ctrl_regWrite = 1;
+				ctrl_halfWord_signed = 0;
 			end
 
 			// Arithmetic: addi
@@ -55,6 +57,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 1;
 				ctrl_regWrite = 1;
+				ctrl_halfWord_signed = 0;
 			end
 			// Load: lw
 			'h23:
@@ -67,6 +70,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 1;
 				ctrl_regWrite = 1;
+				ctrl_halfWord_signed = 0;
 			end
 
 			// Store: sw
@@ -80,6 +84,7 @@ begin
 				ctrl_memWrite = 1;
 				ctrl_aluSrc = 1;
 				ctrl_regWrite = 0;
+				ctrl_halfWord_signed = 0;
 			end
 
 			// Load: lh
@@ -93,6 +98,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 1;
 				ctrl_regWrite = 1;
+				ctrl_halfWord_signed = 2'b11;
 			end
 
 			// Load: lhu
@@ -106,6 +112,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 1;
 				ctrl_regWrite = 1;
+				ctrl_halfWord_signed = 2'b10;
 			end
 
 			// Branch: beq
@@ -119,6 +126,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 0;
 				ctrl_regWrite = 0;
+				ctrl_halfWord_signed = 0;
 			end
 
 			default:
@@ -131,6 +139,7 @@ begin
 				ctrl_memWrite = 0;
 				ctrl_aluSrc = 0;
 				ctrl_regWrite = 0;
+				ctrl_halfWord_signed = 0;
 			end
 
 		endcase
