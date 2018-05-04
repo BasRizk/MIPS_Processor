@@ -20,8 +20,8 @@ wire [31:0] mem_address, read_data_from_mem, wb_data;
 
 // Ctrl Wires
 wire ctrl_pcSrc;
-wire ctrl_regDest, ctrl_branch, ctrl_memRead, ctr_memToReg,
-	 ctr_memWrite, ctrl_aluSrc, ctrl_regWrite;
+wire ctrl_regDest, ctrl_branch, ctrl_memRead, ctrl_memToReg,
+	 ctrl_memWrite, ctrl_aluSrc, ctrl_regWrite;
 wire [1:0] ctrl_aluOp, ctrl_halfWord_signed;
 
 // START PIPELINE REGISTERS WIRES
