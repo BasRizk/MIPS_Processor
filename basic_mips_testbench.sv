@@ -149,13 +149,13 @@ begin
 	$display("NOP");
 	instruction_mem[171:168] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
-	// srl $20, $18, 2 expected $20 = 0x0000 00ff
-	$display("srl $20, $18, 2 expected $20 = 0x0000 00ff");
+	// srl $20, $18, 2 expected $20 = 0x0001 fffe
+	$display("srl $20, $18, 2 expected $20 = 0x0001 fffe");
 	instruction_mem[175:172] = '{8'h00, 8'h12, 8'ha0, 8'h82};
 	// instruction_mem[175:172] = '{8'h00, 8'h10, 8'ha0, 8'h82};	// load from $16
 
-	// sll $21, $18, 1 expected $21 = 0x0000 0fff"
-	$display("sll $21, $18, 1 expected $21 = 0x0000 0fff");
+	// sll $21, $18, 1 expected $21 = 0x0000 3fff"
+	$display("sll $21, $18, 1 expected $21 = 0x0000 3fff");
 	instruction_mem[179:176] = '{8'h00, 8'h12, 8'ha8, 8'h40};
 	// instruction_mem[179:176] = '{8'h00, 8'h10, 8'ha8, 8'h40};	// load from $16
 
