@@ -176,8 +176,7 @@ begin
 	instruction_mem[195:192] = '{8'h01, 8'h51, 8'ha0, 8'h2b};
 // END TEST SET ON LESS THAN INSTRUCTIONS
 
-
-		// beq $0, $0, 2 expected
+	// beq $0, $0, 2 expected
 	$display("beq $0, $0, 1 ");
 	instruction_mem[199:196] = '{8'h10, 8'h01, 8'h00, 8'h01};
 
