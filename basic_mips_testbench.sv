@@ -177,6 +177,28 @@ begin
 // END TEST SET ON LESS THAN INSTRUCTIONS
 
 
+		// beq $0, $0, 2 expected
+	$display("beq $0, $0, 1 ");
+	instruction_mem[199:196] = '{8'h10, 8'h01, 8'h00, 8'h01};
+
+	// addi $10, $0, 10 expected $10 = 10
+	$display("addi $1, $1, 1 expected $1 = 1");
+	instruction_mem[203:200] = '{8'h20, 8'h21, 8'h00, 8'h01};
+
+	$display("NOP");
+	instruction_mem[207:204] = '{8'h00, 8'h00, 8'h00, 8'h00};
+
+	$display("NOP");
+	instruction_mem[211:208] = '{8'h00, 8'h00, 8'h00, 8'h00};
+
+	$display("NOP");
+	instruction_mem[215:212] = '{8'h00, 8'h00, 8'h00, 8'h00};
+
+	// addi $10, $0, 10 expected $10 = 10
+	$display("addi $1, $1, 2 expected $1 = 2 if BEQ is true");
+	instruction_mem[219:216] = '{8'h20, 8'h21, 8'h00, 8'h01};
+
+
 	forever #100 clk = ~clk;
 end
 
