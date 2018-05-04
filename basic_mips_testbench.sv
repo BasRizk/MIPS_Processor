@@ -149,15 +149,33 @@ begin
 	$display("NOP");
 	instruction_mem[171:168] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
-	// srl $20, $18, 2 expected $18 = 0x0000_00ff
+	// srl $20, $18, 2 expected $20 = 0x0000 00ff
 	$display("srl $20, $18, 2 expected $20 = 0x0000 00ff");
 	instruction_mem[175:172] = '{8'h00, 8'h12, 8'ha0, 8'h82};
 	// instruction_mem[175:172] = '{8'h00, 8'h10, 8'ha0, 8'h82};	// load from $16
 
-	// sll $21, $18, 1 expected $18 = 0x0000_0fff
+	// sll $21, $18, 1 expected $21 = 0x0000 0fff"
 	$display("sll $21, $18, 1 expected $21 = 0x0000 0fff");
 	instruction_mem[179:176] = '{8'h00, 8'h12, 8'ha8, 8'h40};
 	// instruction_mem[179:176] = '{8'h00, 8'h10, 8'ha8, 8'h40};	// load from $16
+
+
+// BEGIN TEST SET ON LESS THAN INSTRUCTIONS
+	$display("slt $19,$17,$10 expected $19 = 1");
+	instruction_mem[183:180] = '{8'h02, 8'h2a, 8'h98, 8'h2a};	
+
+	$display("slt $19,$10,$17 expected $19 = 0");
+	instruction_mem[187:184] = '{8'h01, 8'h51, 8'h98, 8'h2a};	
+
+	// sltu $20, $17, $10 expected $20 = 0
+	$display("sltu $20, $17, $10 expected $19 = 0");
+	instruction_mem[191:188] = '{8'h02, 8'h2a, 8'ha0, 8'h2b};
+
+	// sltu $20, $10, $17 expected $20 = 1
+	$display("sltu $20, $10, $17 expected $19 = 1");
+	instruction_mem[195:192] = '{8'h01, 8'h51, 8'ha0, 8'h2b};
+// END TEST SET ON LESS THAN INSTRUCTIONS
+
 
 	forever #100 clk = ~clk;
 end
