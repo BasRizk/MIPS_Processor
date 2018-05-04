@@ -8,7 +8,7 @@ reg [7:0] instruction_mem [255:0];
 wire [31:0] next_instruction;
 wire [31:0] alu_result;
 
-reg [1:0] countNOP;
+reg [2:0] countNOP;
 
 
 initial
@@ -73,29 +73,29 @@ end
 
 main MIPS (next_instruction, alu_result, instruction_mem, clk, reset);
 
-always @ (clk)
+always @ (posedge clk)
 begin
 	//if(reset == 1'b0) begin reset = 1'b1; end
 	$display("time", $time," next_instuction = %h, alu_result = %d",
 	next_instruction, alu_result);
 
-	/*
 	if(next_instruction == 0) begin
+		$display(countNOP);
 		countNOP = countNOP + 1;
 	end
 	else begin
+		$display(countNOP);
 		countNOP = 0;
 	end
 	
 	if(countNOP == 4) begin
-
 		#200 $finish;
 		// terminate after 1 clk cycle 
 		// once reading a nop instuction
 	end
-	*/
+	
 end
 
-initial #3800 $finish;
+//initial #3800 $finish;
 
 endmodule
