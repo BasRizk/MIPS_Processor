@@ -35,7 +35,7 @@ always @(negedge reset or
 	extended_branch_offset or next_instruction_20_16_if_id or
 	next_instruction_15_11_if_id)
 	*/
-always @ (*)
+always @ (posedge clk or negedge reset)
 begin
 	if(~reset) begin
 		ctrl_regWrite_id_ex = 0;
@@ -47,9 +47,7 @@ begin
 		ctrl_aluSrc_id_ex = 0;
 		ctrl_aluOp_id_ex = 0;
 		supposed_next_address_id_ex = 0; 
-		read_data_1_id_ex = 0; 
-		read_data_2_id_ex = 0;
-		extended_branch_offset_id_ex = 0; 
+		
 		next_instruction_20_16_id_ex = 0; 
 		next_instruction_15_11_id_ex = 0;
 		
@@ -64,12 +62,25 @@ begin
 		ctrl_aluSrc_id_ex = ctrl_aluSrc;
 		ctrl_aluOp_id_ex = ctrl_aluOp;
 		supposed_next_address_id_ex = supposed_next_address_if_id; 
-		read_data_1_id_ex = read_data_1; 
-		read_data_2_id_ex = read_data_2;
-		extended_branch_offset_id_ex = extended_branch_offset; 
+		
 		next_instruction_20_16_id_ex = next_instruction_20_16_if_id; 
 		next_instruction_15_11_id_ex = next_instruction_15_11_if_id;
 	end
 end
+
+always @ (*) begin
+	if(~reset) begin
+		read_data_1_id_ex = 0; 
+		read_data_2_id_ex = 0;
+		extended_branch_offset_id_ex = 0; 
+	end
+	else begin
+		read_data_1_id_ex = read_data_1; 
+		read_data_2_id_ex = read_data_2;
+		extended_branch_offset_id_ex = extended_branch_offset; 
+
+	end 
+end
+		
 
 endmodule

@@ -21,12 +21,12 @@ always @ (negedge reset or
 	alu_result_ex_mem or write_register_ex_mem)
 	*/
 
-always @ (*)
+always @ (posedge clk or negedge reset)
 begin
 	if(~reset) begin
 		ctrl_regWrite_mem_wb = 0;
 		ctrl_memToReg_mem_wb = 0;	
-		read_data_from_mem_mem_wb = 0;
+				
 		alu_result_mem_wb = 0;
 		ctrl_regWrite_mem_wb = 0;
 		write_register_mem_wb = 0;
@@ -34,10 +34,21 @@ begin
 	else begin
 		ctrl_regWrite_mem_wb = ctrl_regWrite_ex_mem;
 		ctrl_memToReg_mem_wb = ctrl_memToReg_ex_mem;
-		read_data_from_mem_mem_wb = read_data_from_mem;
+				
 		alu_result_mem_wb = alu_result_ex_mem;
 		ctrl_regWrite_mem_wb = ctrl_regWrite_ex_mem;
 		write_register_mem_wb = write_register_ex_mem;
+	end
+    
+end
+
+always @ (*)
+begin
+	if(~reset) begin
+		read_data_from_mem_mem_wb = 0;
+	end
+	else begin
+		read_data_from_mem_mem_wb = read_data_from_mem;
 	end
     
 end
