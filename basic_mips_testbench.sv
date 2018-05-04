@@ -66,6 +66,8 @@ begin
 	$display("lw $16, 0($10) expected $16 = memory[(0*4) + 10]");
 	instruction_mem[55:52] = '{8'h8d, 8'h50, 8'h00, 8'h00};
 
+
+
 	// addi $19, $0, 32767 expected $19 = 0x0000_007f
 	$display("addi $19, $0, 32767 expected $19 = 0x0000 7fff");
 	instruction_mem[59:56] = '{8'h20, 8'h13, 8'h7f, 8'hff};
