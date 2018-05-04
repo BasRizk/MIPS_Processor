@@ -69,7 +69,7 @@ begin
 	instruction_mem[55:52] = '{8'h8d, 8'h50, 8'h00, 8'h00};
 
 	// addi $19, $0, 32767 expected $19 = 0x0000_007f
-	$display("addi $19, $0, 32767 expected $19 = 0x0000 0000 7 f");
+	$display("addi $19, $0, 32767 expected $19 = 0x0000 7fff");
 	instruction_mem[59:56] = '{8'h20, 8'h13, 8'h7f, 8'hff};
 
 	$display("NOP");
@@ -81,8 +81,8 @@ begin
 	$display("NOP");
 	instruction_mem[71:68] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
-	// addi $19, $0, 24576 expected $19 = 0x0001 ffff
-	$display("addi $19, $0, 24576 expected $19 = 0x0001 ffff");
+	// addi $19, $19, 24576 expected $19 = 0x0001_3fff
+	$display("addi $19, $19, 24576 expected $19 = 0x0001 3fff");
 	instruction_mem[75:72] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
@@ -94,6 +94,8 @@ begin
 	$display("NOP");
 	instruction_mem[87:84] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
+	// addi $19, $19, 24576 expected $19 = 0x0001_9fff
+	$display("addi $19, $19, 24576 expected $19 = 0x0001 9fff");
 	instruction_mem[91:88] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
@@ -105,6 +107,8 @@ begin
 	$display("NOP");
 	instruction_mem[103:100] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
+	// addi $19, $19, 24576 expected $19 = 0x0001_ffff
+	$display("addi $19, $19, 24576 expected $19 = 0x0001 ffff");
 	instruction_mem[107:104] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
@@ -116,6 +120,8 @@ begin
 	$display("NOP");
 	instruction_mem[119:116] = '{8'h00, 8'h00, 8'h00, 8'h00};
 
+	// addi $19, $0, 24576 expected $19 = 0x0000_dfff
+	$display("addi $19, $19, 24576 expected $19 = 0x000 dfff");
 	instruction_mem[123:120] = '{8'h22, 8'h73, 8'h60, 8'h00};
 
 	$display("NOP");
