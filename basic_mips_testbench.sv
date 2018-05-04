@@ -31,36 +31,40 @@ begin
 	
 	$display("NOP");
 	instruction_mem[15:12] = '{8'h00, 8'h00, 8'h00, 8'h00};
+
+	$display("NOP");
+	instruction_mem[19:16] = '{8'h00, 8'h00, 8'h00, 8'h00};
 	
-	// add $11, $11, $10 expected $11 = 10
-	$display("add $11, $11, $10 expected $11 = 10");
-	instruction_mem[19:16] = '{8'h01, 8'h6a, 8'h58, 8'h20};
+	// add $11, $12, $10 expected $11 = 21
+	$display("add $11, $11, $10 expected $11 = 21");
+	instruction_mem[23:20] = '{8'h01, 8'h8a, 8'h58, 8'h20};
 	
-	/*
-	// addi $10, $0, 13 expected  $10 = 13
-	$display("addi $10, $0, 13 expected  $10 = 13");
-	instruction_mem[11:8] = '{8'h20, 8'h0a, 8'h00, 8'h0d};
-	$display("instruction entered = %h%h%h%h ", instruction_mem[11],
-	instruction_mem[10], instruction_mem[9],instruction_mem[8]);
+	// sub $13, $12, $10 expected $13 = 1
+	$display("sub $13, $12, $10 expected $13 = 1");
+	instruction_mem[27:24] = '{8'h01, 8'h8a, 8'h68, 8'h22};
 
-	// sub $12, $10, $11 expected $12 = 3
-	$display("sub $12, $11, $0 expected $12 = 3");
-	instruction_mem[15:12] = '{8'h01, 8'h4b, 8'h60, 8'h22};
-	$display("instruction entered = %h%h%h%h ", instruction_mem[15],
-	instruction_mem[14], instruction_mem[13],instruction_mem[12]);
+	// and $14, $10, $12 expected $14 = 10
+	$display("and $14, $10, $12 expected $14 = 10");
+	instruction_mem[31:28] = '{8'h01, 8'h4c, 8'h70, 8'h24};
 
-	// sw $12, 0($10) expected memory[(0*4) + 10] = 3
-	$display("sw $12, 0($10) expected memory[10] = 3");
-	instruction_mem[19:16] = '{8'had, 8'h4c, 8'h00, 8'h00};
-	$display("instruction entered = %h%h%h%h ", instruction_mem[19],
-	instruction_mem[18], instruction_mem[17],instruction_mem[16]);
+	// or $15, $12, $10 expected $15 = 11
+	$display("or $15, $12, $10 expected $15 = 11");
+	instruction_mem[31:28] = '{8'h01, 8'h8a, 8'h78, 8'h25};
 
-	// lw $13, 0($10) expected $13 = memory[(0*4) + 10]
-	$display("lw $13, 0($10) expected $13 = memory[(0*4) + 10]");
-	instruction_mem[23:20] = '{8'h8d, 8'h4d, 8'h00, 8'h00};
-	$display("instruction entered = %h%h%h%h ", instruction_mem[23],
-	instruction_mem[22], instruction_mem[21],instruction_mem[20]);
-	*/
+	// sw $11, 0($10) expected memory[(0*4) + 10] = 21
+	$display("sw $11, 0($10) expected memory[10] = 21");
+	instruction_mem[35:32] = '{8'had, 8'h4b, 8'h00, 8'h00};
+
+	$display("NOP");
+	instruction_mem[39:36] = '{8'h00, 8'h00, 8'h00, 8'h00};
+	
+	$display("NOP");
+	instruction_mem[43:40] = '{8'h00, 8'h00, 8'h00, 8'h00};
+
+	// lw $16, 0($10) expected $16 = memory[(0*4) + 10]
+	$display("lw $16, 0($10) expected $16 = memory[(0*4) + 10]");
+	instruction_mem[47:44] = '{8'h8d, 8'h50, 8'h00, 8'h00};
+
 	forever #100 clk = ~clk;
 end
 
@@ -72,15 +76,15 @@ begin
 	$display("time", $time," next_instuction = %h, alu_result = %d",
 	next_instruction, alu_result);
 
-/*
+	/*
 	if(next_instruction == 32'b0000_0000_0000_0000_0000_0000_0000) begin
-		countNOP <= countNOP + 1;
+		countNOP = countNOP + 1;
 	end
 	else begin
-		countNOP <= 0;
+		countNOP = 0;
 	end
 	
-	if(countNOP == 3) begin
+	if(countNOP == 4) begin
 
 		#200 $finish;
 		// terminate after 1 clk cycle 
@@ -89,7 +93,6 @@ begin
 	*/
 end
 
-initial #1800 $finish;
-
+initial #3600 $finish;
 
 endmodule
